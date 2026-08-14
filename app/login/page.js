@@ -32,6 +32,9 @@ export default function LoginPage() {
       </Link>
 
       <div style={{ fontFamily: "Georgia, serif", fontSize: 24 }}>Logga in</div>
+      <div style={{ fontSize: 13, opacity: 0.75, lineHeight: 1.5 }}>
+        Inget konto än? Inga problem — samma formulär skapar automatiskt ett konto åt dig första gången du loggar in.
+      </div>
 
       {status === "sent" ? (
         <div style={{ fontSize: 14, lineHeight: 1.6 }}>

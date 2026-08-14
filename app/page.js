@@ -29,11 +29,11 @@ export default function Home() {
 
       {user === null && (
         <>
-          <div style={{ textAlign: "center", fontSize: 13, opacity: 0.8 }}>
-            Logga in för att spara din Solo-statistik permanent.
+          <div style={{ textAlign: "center", fontSize: 13, opacity: 0.8, lineHeight: 1.5 }}>
+            Logga in för att spela. Har du inget konto än skapas ett automatiskt när du loggar in första gången.
           </div>
           <Link href="/login" style={btnPrimary}>
-            Logga in
+            Logga in / Skapa konto
           </Link>
         </>
       )}
@@ -43,7 +43,10 @@ export default function Home() {
           <div style={{ textAlign: "center", fontSize: 13, opacity: 0.8 }}>
             Inloggad som {user.email}
           </div>
-          <Link href="/solo" style={btnPrimary}>
+          <Link href="/friends" style={btnPrimary}>
+            Spela med vänner
+          </Link>
+          <Link href="/solo" style={btnGhostLink}>
             Spela Solo
           </Link>
           <button onClick={signOut} style={btnGhost}>
@@ -67,6 +70,18 @@ const btnPrimary = {
   border: "none",
   cursor: "pointer",
   fontSize: 16,
+};
+
+const btnGhostLink = {
+  display: "block",
+  textAlign: "center",
+  padding: "14px",
+  borderRadius: 12,
+  background: "transparent",
+  color: "#EAF3EC",
+  border: "1px solid #2A4A3A",
+  textDecoration: "none",
+  fontSize: 15,
 };
 
 const btnGhost = {
