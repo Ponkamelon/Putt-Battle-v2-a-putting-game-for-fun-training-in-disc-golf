@@ -31,24 +31,6 @@ export default function Home() {
         style={{ width: 200, height: 200, borderRadius: 32 }}
       />
 
-      <div style={{ display: "flex", gap: 8 }}>
-        {LANGUAGES.map((code) => (
-          <button
-            key={code}
-            onClick={() => setLanguage(code)}
-            style={{
-              padding: "8px 16px", borderRadius: 999, cursor: "pointer",
-              border: language === code ? `1px solid ${T.accent}` : `1px solid ${T.surfaceLine}`,
-              background: language === code ? T.accent : "transparent",
-              color: language === code ? T.accentInk : T.ink,
-              fontFamily: BODY_FONT, fontWeight: 600, fontSize: 13,
-            }}
-          >
-            {LANG_LABEL[code]}
-          </button>
-        ))}
-      </div>
-
       {user === undefined && <div style={{ opacity: 0.6, fontFamily: BODY_FONT }}>Laddar…</div>}
 
       {user === null && (
@@ -79,11 +61,29 @@ export default function Home() {
         </div>
       )}
 
+      <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
+        {LANGUAGES.map((code) => (
+          <button
+            key={code}
+            onClick={() => setLanguage(code)}
+            style={{
+              padding: "4px 10px", borderRadius: 999, cursor: "pointer",
+              border: language === code ? `1px solid ${T.accent}` : `1px solid ${T.surfaceLine}`,
+              background: language === code ? T.accent : "transparent",
+              color: language === code ? T.accentInk : T.inkDim,
+              fontFamily: BODY_FONT, fontWeight: 600, fontSize: 11,
+            }}
+          >
+            {LANG_LABEL[code]}
+          </button>
+        ))}
+      </div>
+
       <a
         href={PRIVACY_FILES[language] || PRIVACY_FILES.swe}
         target="_blank"
         rel="noopener noreferrer"
-        style={{ fontSize: 12, color: "#999", textDecoration: "underline", marginTop: 8 }}
+        style={{ fontSize: 12, color: "#999", textDecoration: "underline", marginTop: 0 }}
       >
         {s.privacyPolicyLabel}
       </a>
