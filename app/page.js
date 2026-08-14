@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "../lib/supabaseClient";
+import { LOGO_DATA_URI, T, DISPLAY_FONT, MONO_FONT, BODY_FONT, LANGUAGES, LANG_LABEL, PRIVACY_FILES, detectLanguage, STRINGS, t } from "../lib/shared";
 
 export default function Home() {
   const [user, setUser] = useState(undefined); // undefined = laddar, null = utloggad
+  const [language, setLanguage] = useState(detectLanguage);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUser(data.user || null));
@@ -19,41 +21,72 @@ export default function Home() {
     await supabase.auth.signOut();
   };
 
+  const s = STRINGS[language];
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-      <div style={{ fontFamily: "Georgia, serif", fontSize: 30, textAlign: "center" }}>
-        PUTT <span style={{ color: "#7CE38B" }}>BATTLE</span>
+    <div style={{ display: "flex", flexDirection: "column", gap: 24, alignItems: "center" }}>
+      <img
+        src={LOGO_DATA_URI}
+        alt="Putt Battle"
+        style={{ width: 200, height: 200, borderRadius: 32 }}
+      />
+
+      <div style={{ display: "flex", gap: 8 }}>
+        {LANGUAGES.map((code) => (
+          <button
+            key={code}
+            onClick={() => setLanguage(code)}
+            style={{
+              padding: "8px 16px", borderRadius: 999, cursor: "pointer",
+              border: language === code ? `1px solid ${T.accent}` : `1px solid ${T.surfaceLine}`,
+              background: language === code ? T.accent : "transparent",
+              color: language === code ? T.accentInk : T.ink,
+              fontFamily: BODY_FONT, fontWeight: 600, fontSize: 13,
+            }}
+          >
+            {LANG_LABEL[code]}
+          </button>
+        ))}
       </div>
 
-      {user === undefined && <div style={{ textAlign: "center", opacity: 0.6 }}>Laddar…</div>}
+      {user === undefined && <div style={{ opacity: 0.6, fontFamily: BODY_FONT }}>Laddar…</div>}
 
       {user === null && (
-        <>
-          <div style={{ textAlign: "center", fontSize: 13, opacity: 0.8, lineHeight: 1.5 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 14, width: "100%" }}>
+          <div style={{ textAlign: "center", fontSize: 13, opacity: 0.8, lineHeight: 1.5, fontFamily: BODY_FONT }}>
             Logga in för att spela. Har du inget konto än skapas ett automatiskt när du loggar in första gången.
           </div>
           <Link href="/login" style={btnPrimary}>
             Logga in / Skapa konto
           </Link>
-        </>
+        </div>
       )}
 
       {user && (
-        <>
-          <div style={{ textAlign: "center", fontSize: 13, opacity: 0.8 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 14, width: "100%" }}>
+          <div style={{ textAlign: "center", fontSize: 13, opacity: 0.8, fontFamily: BODY_FONT }}>
             Inloggad som {user.email}
           </div>
           <Link href="/friends" style={btnPrimary}>
-            Spela med vänner
+            {s.startPlayFriends}
           </Link>
           <Link href="/solo" style={btnGhostLink}>
-            Spela Solo
+            {s.startPlaySolo}
           </Link>
           <button onClick={signOut} style={btnGhost}>
             Logga ut
           </button>
-        </>
+        </div>
       )}
+
+      <a
+        href={PRIVACY_FILES[language] || PRIVACY_FILES.swe}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ fontSize: 12, color: "#999", textDecoration: "underline", marginTop: 8 }}
+      >
+        {s.privacyPolicyLabel}
+      </a>
     </div>
   );
 }
@@ -63,13 +96,14 @@ const btnPrimary = {
   textAlign: "center",
   padding: "16px",
   borderRadius: 12,
-  background: "#7CE38B",
-  color: "#0E2417",
+  background: T.accent,
+  color: T.accentInk,
   fontWeight: 700,
   textDecoration: "none",
   border: "none",
   cursor: "pointer",
   fontSize: 16,
+  fontFamily: DISPLAY_FONT,
 };
 
 const btnGhostLink = {
@@ -78,18 +112,20 @@ const btnGhostLink = {
   padding: "14px",
   borderRadius: 12,
   background: "transparent",
-  color: "#EAF3EC",
-  border: "1px solid #2A4A3A",
+  color: T.ink,
+  border: `1px solid ${T.surfaceLine}`,
   textDecoration: "none",
   fontSize: 15,
+  fontFamily: DISPLAY_FONT,
 };
 
 const btnGhost = {
   padding: "12px",
   borderRadius: 12,
   background: "transparent",
-  color: "#EAF3EC",
-  border: "1px solid #2A4A3A",
+  color: T.ink,
+  border: `1px solid ${T.surfaceLine}`,
   cursor: "pointer",
   fontSize: 14,
+  fontFamily: BODY_FONT,
 };
