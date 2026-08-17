@@ -28,7 +28,7 @@ export default function Home() {
       <img
         src={LOGO_DATA_URI}
         alt="Putt Battle"
-        style={{ width: 200, height: 200, borderRadius: 32 }}
+        style={{ width: 220, height: 220, objectFit: "contain" }}
       />
 
       {user === undefined && <div style={{ opacity: 0.6, fontFamily: BODY_FONT }}>Laddar…</div>}

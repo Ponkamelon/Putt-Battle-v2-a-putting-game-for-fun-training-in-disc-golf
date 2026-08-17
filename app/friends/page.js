@@ -652,7 +652,7 @@ export default function FriendsPage() {
 
   return (
     <div style={{
-      minHeight: "100vh", background: `radial-gradient(circle at 50% -10%, ${T.bg2}, ${T.bg} 60%)`,
+      minHeight: "100vh", background: "rgba(6, 18, 11, 0.72)",
       color: T.ink, fontFamily: BODY_FONT, display: "flex", justifyContent: "center",
       padding: "24px 16px", boxSizing: "border-box",
     }}>
