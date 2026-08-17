@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "../lib/supabaseClient";
-import { LOGO_DATA_URI, T, DISPLAY_FONT, MONO_FONT, BODY_FONT, LANGUAGES, LANG_LABEL, PRIVACY_FILES, detectLanguage, STRINGS, t } from "../lib/shared";
+import { LOGO_DATA_URI, T, DISPLAY_FONT, MONO_FONT, BODY_FONT, LANGUAGES, LANG_LABEL, PRIVACY_FILES, detectLanguage, STRINGS } from "../lib/shared";
 
 export default function Home() {
   const [user, setUser] = useState(undefined); // undefined = laddar, null = utloggad
@@ -30,7 +30,7 @@ export default function Home() {
           PUTT <span style={{ color: T.accent }}>BATTLE</span>
         </div>
         <div style={{ fontFamily: MONO_FONT, fontSize: 12, color: T.inkDim, marginTop: 4 }}>
-          {t(language, "tagline")}
+          TRÄNA · TÄVLA · SKRATTA · UPPREPA
         </div>
       </div>
 
@@ -59,10 +59,10 @@ export default function Home() {
             Inloggad som {user.email}
           </div>
           <Link href="/friends" style={btnPrimary}>
-            {s.startPlayFriends}
+            Spela med vänner
           </Link>
           <Link href="/solo" style={btnPrimary}>
-            {s.startPlaySolo}
+            Spela Solo
           </Link>
           <button onClick={signOut} style={btnGreenDark}>
             Logga ut
