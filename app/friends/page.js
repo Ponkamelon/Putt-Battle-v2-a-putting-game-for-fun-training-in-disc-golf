@@ -211,6 +211,23 @@ function Pill({ children, active, onClick }) {
   );
 }
 
+function GreenPill({ children, active, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        flex: 1, padding: "10px 8px", borderRadius: 999, cursor: "pointer",
+        fontFamily: BODY_FONT, fontWeight: 600, fontSize: 13, textAlign: "center",
+        background: active ? T.good : "transparent",
+        color: active ? T.accentInk : T.ink,
+        border: `1.5px solid ${active ? T.good : T.surfaceLine}`,
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
 export default function FriendsPage() {
   const router = useRouter();
   const [screen, setScreen] = useState("setup");
@@ -808,10 +825,10 @@ function SetupScreen({ lang, numPlayers, updateNumPlayers, names, setNames, diff
       </Section>
 
       <Section title="">
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          <Toggle label={STRINGS[lang].sectionPerks} value={perksOn} onChange={setPerksOn} />
-          <Toggle label={STRINGS[lang].sectionPress} value={pressOn} onChange={setPressOn} />
-          <Toggle label={STRINGS[lang].sectionChallenge} value={challengeOn} onChange={setChallengeOn} />
+        <div style={{ display: "flex", gap: 8 }}>
+          <GreenPill active={perksOn} onClick={() => setPerksOn(!perksOn)}>{STRINGS[lang].sectionPerks}</GreenPill>
+          <GreenPill active={pressOn} onClick={() => setPressOn(!pressOn)}>{STRINGS[lang].sectionPress}</GreenPill>
+          <GreenPill active={challengeOn} onClick={() => setChallengeOn(!challengeOn)}>{STRINGS[lang].sectionChallenge}</GreenPill>
         </div>
       </Section>
 

@@ -25,6 +25,15 @@ export default function Home() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, alignItems: "center" }}>
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontFamily: DISPLAY_FONT, fontSize: 30, letterSpacing: 0.5, color: T.ink }}>
+          PUTT <span style={{ color: T.accent }}>BATTLE</span>
+        </div>
+        <div style={{ fontFamily: MONO_FONT, fontSize: 12, color: T.inkDim, marginTop: 4 }}>
+          {t(language, "tagline")}
+        </div>
+      </div>
+
       <img
         src={LOGO_DATA_URI}
         alt="Putt Battle"
@@ -46,16 +55,16 @@ export default function Home() {
 
       {user && (
         <div style={{ display: "flex", flexDirection: "column", gap: 14, width: "100%" }}>
-          <div style={{ textAlign: "center", fontSize: 13, opacity: 0.8, fontFamily: BODY_FONT }}>
+          <div style={{ textAlign: "center", fontSize: 13, fontWeight: 600, color: "#111", lineHeight: 1.5, fontFamily: BODY_FONT }}>
             Inloggad som {user.email}
           </div>
           <Link href="/friends" style={btnPrimary}>
             {s.startPlayFriends}
           </Link>
-          <Link href="/solo" style={btnGhostLink}>
+          <Link href="/solo" style={btnPrimary}>
             {s.startPlaySolo}
           </Link>
-          <button onClick={signOut} style={btnGhost}>
+          <button onClick={signOut} style={btnGreenDark}>
             Logga ut
           </button>
         </div>
@@ -106,26 +115,17 @@ const btnPrimary = {
   fontFamily: DISPLAY_FONT,
 };
 
-const btnGhostLink = {
+const btnGreenDark = {
   display: "block",
+  width: "100%",
   textAlign: "center",
-  padding: "14px",
-  borderRadius: 12,
-  background: "transparent",
-  color: T.ink,
-  border: `1px solid ${T.surfaceLine}`,
-  textDecoration: "none",
-  fontSize: 15,
-  fontFamily: DISPLAY_FONT,
-};
-
-const btnGhost = {
   padding: "12px",
   borderRadius: 12,
-  background: "transparent",
+  background: T.surface,
   color: T.ink,
+  fontWeight: 700,
   border: `1px solid ${T.surfaceLine}`,
   cursor: "pointer",
   fontSize: 14,
-  fontFamily: BODY_FONT,
+  fontFamily: DISPLAY_FONT,
 };
